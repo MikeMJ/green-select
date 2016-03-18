@@ -118,10 +118,6 @@ function scrollByNavigation(optionsDiv, selectedItem) {
     var optionsCurrentScroll = $(optionsDiv).scrollTop();
     if (itemTop > $(optionsDiv).height())
         $(optionsDiv).scrollTop(optionsCurrentScroll + itemHeight);
-    //else if (itemTop < optionsCurrentScroll)
-      //  $(optionsDiv).scrollTop(optionsCurrentScroll - itemHeight);
-
-    //console.log($(optionsDiv).scrollTop());
-    console.log(itemTop);
-
+    else if (itemTop < optionsCurrentScroll)
+        $(optionsDiv).scrollTop(optionsCurrentScroll - itemHeight);
 }
