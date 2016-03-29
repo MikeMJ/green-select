@@ -1,15 +1,17 @@
-﻿/// <reference path="Helpers.js" />
-$(function () {
+﻿$(function () {
     $(document).mouseup(function (e) {
         var hideAble = $('.ma-select-options');
         var filterInput = $('.ma-select-box-filter');
+        $(e.target).parent().next().attr('id', '_maSelectTmp');
         if (filterInput.is(e.target)) {
             if (e.which == 1) {
                 $(e.target).parent().next().toggle();
                 scrollToSelectedItem(e.target);
+                $(hideAble).not('#_maSelectTmp').hide();
             }
-        } else if (!hideAble.is(e.target) && hideAble.has(e.target).length === 0)
+        } else if (!hideAble.is(e.target) && hideAble.has(e.target).length === 0) 
             $(hideAble).hide();
+        $('#_maSelectTmp').removeAttr('id');
     });
 
     $('.ma-select-li').click(function () {
@@ -39,16 +41,16 @@ $(function () {
             $(optionsDiv).show();
             var options = (optionsDiv).find('li');
             filter = $(filterInput).val();
-                filter = filter.replace("i", "İ").replace("i", "İ").replace("ı", "I");
-                for (var i = 0; i < options.length; i++) {
-                    var option = options[i];
-                    var optionText = $(option).html();
-                    if (optionText.substring(0, filter.length).toLowerCase() == filter.toLowerCase()) {
-                        $(option).addClass('ma-visible-option').show();
-                    } else {
-                        $(option).removeClass('ma-visible-option').hide();
-                    }
+            filter = filter.replace("i", "İ").replace("i", "İ").replace("ı", "I");
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                var optionText = $(option).html();
+                if (optionText.substring(0, filter.length).toLowerCase() == filter.toLowerCase()) {
+                    $(option).addClass('ma-visible-option').show();
+                } else {
+                    $(option).removeClass('ma-visible-option').hide();
                 }
+            }
         }
     });
 });
@@ -61,8 +63,10 @@ function scrollToSelectedItem(filterInput) {
     var hiddenInput = $(filterInput).parent().next().next();
     if ($(hiddenInput).val() != '') {
         var li = $(filterInput).parent().next().find('li[value="{0}"]'.format($(hiddenInput).val()));
-        var top = $(li).position().top;
-        $(filterInput).parent().scrollTop($(li).position().top);
+        if ($(li).length > 0) {
+            var top = $(li).position().top;
+            $(filterInput).parent().scrollTop($(li).position().top);
+        }
     }
 }
 
@@ -121,3 +125,4 @@ function scrollByNavigation(optionsDiv, selectedItem) {
     else if (itemTop < optionsCurrentScroll)
         $(optionsDiv).scrollTop(optionsCurrentScroll - itemHeight);
 }
+
