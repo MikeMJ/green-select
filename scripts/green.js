@@ -21,7 +21,7 @@
         var filterInput = $(options).prev().find('input');
         var hiddenInput = $(options).next();
         $(filterInput).val($(this).html());
-        $(hiddenInput).val($(this).val());
+        $(hiddenInput).val($(this).attr('optvalue'));
         $(options).hide();
     });
 
@@ -108,7 +108,7 @@ function setSelectedOption(optionsDiv, selectedItem) {
     /// <param name="optionsDiv" type="type">Options container in which to look for the list items </param>
     /// <param name="selectedItem" type="type">Current list item</param>
     //$(optionsDiv).prev().find('input').val($(selectedItem).html());
-    $(optionsDiv).next('input').val($(selectedItem).val());
+    $(optionsDiv).next('input').val($(selectedItem).attr('optvalue'));
 }
 
 function scrollByNavigation(optionsDiv, selectedItem) {
