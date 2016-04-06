@@ -2,8 +2,8 @@
     $(document).mouseup(function (e) {
         var hideAble = $('.ma-select-options');
         var filterInput = $('.ma-select-box-filter');
-        $(e.target).parent().next().attr('id', '_maSelectTmp');
         if (filterInput.is(e.target)) {
+        $(e.target).parent().next().attr('id', '_maSelectTmp');
             if (e.which == 1) {
                 $(e.target).parent().next().toggle();
                 scrollToSelectedItem(e.target);
